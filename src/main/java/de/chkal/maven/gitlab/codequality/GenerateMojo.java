@@ -60,12 +60,14 @@ public class GenerateMojo extends AbstractMojo {
     }
 
     // Create GitLab report
-    try (FileOutputStream stream = new FileOutputStream(outputFile)) {
-      new ReportSerializer().write(findings, stream);
-      log.info("GitLab code quality report containing {} issue created: {}",
-          findings.size(), outputFile);
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
+    if (findings.size() > 0) {
+      try (FileOutputStream stream = new FileOutputStream(outputFile)) {
+        new ReportSerializer().write(findings, stream);
+        log.info("GitLab code quality report containing {} issue created: {}",
+            findings.size(), outputFile);
+      } catch (IOException e) {
+        throw new IllegalStateException(e);
+      }
     }
 
   }
