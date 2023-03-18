@@ -65,13 +65,10 @@ public class CheckstyleFindingProvider implements FindingProvider {
 
     Finding finding = new Finding();
     finding.setDescription(String.format("%s: %s", getName(), errorType.getMessage()));
+    finding.setFingerprint(createFingerprint(fileType, errorType));
     finding.setSeverity(getSeverity(errorType.getSeverity()));
     finding.setPath(getRepositoryRelativePath(fileType));
     finding.setLine(getLineNumber(errorType));
-
-    // Checkstyle doesn't provide any fingerprints, so we create our own one
-    autoGenerateFingerprint(finding);
-
     return finding;
 
   }
@@ -94,18 +91,32 @@ public class CheckstyleFindingProvider implements FindingProvider {
     }
   }
 
-  private void autoGenerateFingerprint(Finding finding) {
+  private String createFingerprint(FileType fileType, ErrorType errorType) {
 
     try {
 
-      String key = String.format("%s:%s:%d",
-          finding.getDescription(), finding.getPath(), finding.getLine());
+      /*
+       * The fingerprint is created from:
+       *   - file path
+       *   - severity
+       *   - message text
+       *   - column index (which will most likely not change for a finding)
+       *
+       * We do NOT use:
+       *   - line number (will change if code is added/removed above or below the finding)
+       */
+      String key = String.format("%s:%s:%s:%s",
+          getRepositoryRelativePath(fileType),
+          errorType.getSeverity(),
+          errorType.getMessage(),
+          errorType.getColumn()
+      );
 
       MessageDigest sha1Digest = MessageDigest.getInstance("SHA256");
       sha1Digest.update(key.getBytes(StandardCharsets.UTF_8));
       byte[] digest = sha1Digest.digest();
 
-      finding.setFingerprint(DatatypeConverter.printHexBinary(digest).toLowerCase(Locale.ROOT));
+      return DatatypeConverter.printHexBinary(digest).toLowerCase(Locale.ROOT);
 
     } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
