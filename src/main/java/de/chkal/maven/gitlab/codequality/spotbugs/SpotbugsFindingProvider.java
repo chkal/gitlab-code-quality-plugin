@@ -9,6 +9,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +29,18 @@ public class SpotbugsFindingProvider implements FindingProvider {
   }
 
   @Override
-  public List<Finding> getFindings(File inputFile) {
+  public String getName() {
+    return "SpotBugs";
+  }
+
+  @Override
+  public List<Finding> getFindings(InputStream stream) {
 
     try {
 
-      Unmarshaller unmarshaller = JAXBContext.newInstance(BugCollection.class).createUnmarshaller();
-      BugCollection bugCollection = (BugCollection) unmarshaller.unmarshal(inputFile);
+      JAXBContext jaxbContext = JAXBContext.newInstance(BugCollection.class);
+      Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+      BugCollection bugCollection = (BugCollection) unmarshaller.unmarshal(stream);
 
       return bugCollection.getBugInstance().stream()
           .map(this::transformBugInstance)
@@ -51,22 +58,11 @@ public class SpotbugsFindingProvider implements FindingProvider {
     Optional<SourcePosition> sourcePosition = getSourcePosition(bugInstance);
 
     Finding finding = new Finding();
-
-    // a short description
-    finding.setDescription(bugInstance.getShortMessage());
-
-    // unique fingerprint
+    finding.setDescription(String.format("%s: %s", getName(), bugInstance.getShortMessage()));
     finding.setFingerprint(bugInstance.getInstanceHash());
-
-    // translate priority to severity
     finding.setSeverity(getSeverity(bugInstance.getPriority()));
-
-    // path of the affected file
     finding.setPath(sourcePosition.map(this::getRepositoryRelativePath).orElse("ERROR"));
-
-    // source code line
     finding.setLine(sourcePosition.map(SourcePosition::getLine).orElse(1));
-
     return finding;
 
   }

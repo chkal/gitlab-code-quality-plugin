@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.8.0">
+  <file name="/home/user/projects/myapp/src/main/java/com/example/myapp/Foo.java">
+  </file>
+  <file name="/home/user/projects/myapp/src/main/java/com/example/myapp/Bar.java">
+    <error line="25" column="16" severity="error" message="&apos;static&apos; modifier out of order with the JLS suggestions." source="com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck"/>
+    <error line="90" column="8" severity="error" message="&apos;if&apos; child has incorrect indentation level 7, expected level should be 6." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+  </file>
+</checkstyle>

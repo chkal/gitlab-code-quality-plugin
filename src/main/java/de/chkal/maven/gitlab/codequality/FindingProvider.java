@@ -1,10 +1,12 @@
 package de.chkal.maven.gitlab.codequality;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 public interface FindingProvider {
 
-  List<Finding> getFindings(File inputFile);
+  String getName();
+
+  List<Finding> getFindings(InputStream stream);
 
 }

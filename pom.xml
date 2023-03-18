@@ -22,7 +22,7 @@
     <developerConnection>scm:git:git@github.com:chkal/gitlab-code-quality-plugin.git</developerConnection>
     <url>https://github.com/chkal/gitlab-code-quality-plugin</url>
   </scm>
-  
+
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -68,6 +68,19 @@
                 <source>src/main/xsd/bugcollection.xsd</source>
               </sources>
               <packageName>de.chkal.maven.gitlab.codequality.spotbugs</packageName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>schema-checkstyle</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/xsd/checkstyle.xsd</source>
+              </sources>
+              <packageName>de.chkal.maven.gitlab.codequality.checkstyle</packageName>
+              <clearOutputDir>false</clearOutputDir>
             </configuration>
           </execution>
         </executions>
@@ -148,6 +161,20 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.10.1</version>
+    </dependency>
+
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.24.2</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
