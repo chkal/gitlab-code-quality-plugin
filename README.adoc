@@ -1,6 +1,6 @@
 = gitlab-code-quality-plugin
-:version_stable: 1.0.0-SNAPSHOT
-:version_snapshot: 1.0.0-SNAPSHOT
+:version_stable: 1.0.0
+:version_snapshot: 1.1.0-SNAPSHOT
 
 This Maven plugin allows you to transform XML reports created by code quality tools like
 https://spotbugs.github.io/[SpotBugs] and https://checkstyle.org/[Checkstyle]
