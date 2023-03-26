@@ -11,15 +11,74 @@ image::.readme/gitlab-merge-request-widget.png[]
 
 == Usage
 
-As this plugin processes XML reports of other code quality tools, you have to set up
-the Maven plugins for SpotBugs and Checkstyle yourself before adding the plugin.
+=== Step 1: Set up SpotBugs and/or Checkstyle
 
-Then, just add the following plugin definition to your `pom.xml`:
+As this plugin processes XML reports of other code quality tools, you have to set up
+the Maven plugins for SpotBugs and/or Checkstyle first.
+
+Such a setup could look like this:
 
 [source,xml,subs="+attributes"]
 ----
 <project>
+  <build>
+    <plugins>
 
+      <!-- SpotBugs -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.7.3.3</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>spotbugs</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Checkstyle -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <configLocation>
+            https://raw.githubusercontent.com/checkstyle/checkstyle/master/src/main/resources/google_checks.xml
+          </configLocation>
+          <linkXRef>false</linkXRef>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>10.9.3</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
+----
+
+=== Step 2: Add the plugin to your pom.xml
+
+Now add the following plugin definition to your `pom.xml`:
+
+[source,xml,subs="+attributes"]
+----
+<project>
   <build>
     <plugins>
 
@@ -33,6 +92,7 @@ Then, just add the following plugin definition to your `pom.xml`:
         <version>{version_stable}</version>
         <executions>
           <execution>
+            <phase>verify</phase>
             <goals>
               <goal>generate</goal>
             </goals>
@@ -55,7 +115,9 @@ generate the following JSON file:
 
 * `target/gl-code-quality-report.json`
 
-Now you will have to tell GitLab about this file by modifying your `.gitlab-ci.yml` file like this:
+=== Step 3: Add the plugin to your pom.xml
+
+Finally, you will have to tell GitLab about generated JSON file by modifying your `.gitlab-ci.yml` file like this:
 
 [source,yaml]
 ----
