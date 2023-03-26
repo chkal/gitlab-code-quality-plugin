@@ -112,9 +112,9 @@ public class CheckstyleFindingProvider implements FindingProvider {
           errorType.getColumn()
       );
 
-      MessageDigest sha1Digest = MessageDigest.getInstance("SHA256");
-      sha1Digest.update(key.getBytes(StandardCharsets.UTF_8));
-      byte[] digest = sha1Digest.digest();
+      MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+      messageDigest.update(key.getBytes(StandardCharsets.UTF_8));
+      byte[] digest = messageDigest.digest();
 
       return DatatypeConverter.printHexBinary(digest).toLowerCase(Locale.ROOT);
 
