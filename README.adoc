@@ -1,5 +1,5 @@
 = gitlab-code-quality-plugin
-:version_stable: 1.0.0
+:version_stable: 1.0.1
 :version_snapshot: 1.1.0-SNAPSHOT
 
 This Maven plugin allows you to transform XML reports created by code quality tools like
