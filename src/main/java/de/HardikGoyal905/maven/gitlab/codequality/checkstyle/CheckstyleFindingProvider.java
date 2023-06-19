@@ -1,8 +1,8 @@
-package de.chkal.maven.gitlab.codequality.checkstyle;
+package de.HardikGoyal905.maven.gitlab.codequality.checkstyle;
 
-import de.chkal.maven.gitlab.codequality.Finding;
-import de.chkal.maven.gitlab.codequality.Finding.Severity;
-import de.chkal.maven.gitlab.codequality.FindingProvider;
+import de.HardikGoyal905.maven.gitlab.codequality.FindingProvider;
+import de.HardikGoyal905.maven.gitlab.codequality.Finding;
+import de.HardikGoyal905.maven.gitlab.codequality.Finding.Severity;
 import jakarta.xml.bind.DatatypeConverter;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.lang.model.type.ErrorType;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;

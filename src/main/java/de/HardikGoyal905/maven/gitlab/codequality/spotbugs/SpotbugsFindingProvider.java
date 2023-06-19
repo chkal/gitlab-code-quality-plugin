@@ -1,9 +1,9 @@
-package de.chkal.maven.gitlab.codequality.spotbugs;
+package de.HardikGoyal905.maven.gitlab.codequality.spotbugs;
 
-import de.chkal.maven.gitlab.codequality.Finding;
-import de.chkal.maven.gitlab.codequality.Finding.Severity;
-import de.chkal.maven.gitlab.codequality.FindingProvider;
-import de.chkal.maven.gitlab.codequality.Logger;
+import de.HardikGoyal905.maven.gitlab.codequality.FindingProvider;
+import de.HardikGoyal905.maven.gitlab.codequality.Logger;
+import de.HardikGoyal905.maven.gitlab.codequality.Finding;
+import de.HardikGoyal905.maven.gitlab.codequality.Finding.Severity;
 import de.chkal.maven.gitlab.codequality.spotbugs.BugCollection.BugInstance;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;

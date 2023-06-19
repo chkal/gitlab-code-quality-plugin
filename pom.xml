@@ -3,14 +3,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.chkal.maven</groupId>
+  <groupId>de.HardikGoyal905.maven</groupId>
   <artifactId>gitlab-code-quality-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <version>1.1.0-SNAPSHOT</version>
 
   <name>gitlab-code-quality-plugin</name>
   <description>gitlab-code-quality-plugin</description>
-  <url>https://github.com/chkal/gitlab-code-quality-plugin</url>
+  <url>https://github.com/HardikGoyal905/gitlab-code-quality-plugin</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,9 +18,9 @@
   </properties>
 
   <scm>
-    <connection>scm:git:https://github.com/chkal/gitlab-code-quality-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:chkal/gitlab-code-quality-plugin.git</developerConnection>
-    <url>https://github.com/chkal/gitlab-code-quality-plugin</url>
+    <connection>scm:git:https://github.com/HardikGoyal905/gitlab-code-quality-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:HardikGoyal905/gitlab-code-quality-plugin.git</developerConnection>
+    <url>https://github.com/HardikGoyal905/gitlab-code-quality-plugin</url>
   </scm>
 
   <distributionManagement>
@@ -41,14 +41,6 @@
     </license>
   </licenses>
 
-  <developers>
-    <developer>
-      <id>chkal</id>
-      <name>Christian Kaltepoth</name>
-      <email>christian@kaltepoth.de</email>
-    </developer>
-  </developers>
-
   <build>
     <plugins>
 
@@ -67,7 +59,7 @@
               <sources>
                 <source>src/main/xsd/bugcollection.xsd</source>
               </sources>
-              <packageName>de.chkal.maven.gitlab.codequality.spotbugs</packageName>
+              <packageName>de.HardikGoyal905.maven.gitlab.codequality.spotbugs</packageName>
             </configuration>
           </execution>
           <execution>
@@ -79,7 +71,7 @@
               <sources>
                 <source>src/main/xsd/checkstyle.xsd</source>
               </sources>
-              <packageName>de.chkal.maven.gitlab.codequality.checkstyle</packageName>
+              <packageName>de.HardikGoyal905.maven.gitlab.codequality.checkstyle</packageName>
               <clearOutputDir>false</clearOutputDir>
             </configuration>
           </execution>
@@ -221,6 +213,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>

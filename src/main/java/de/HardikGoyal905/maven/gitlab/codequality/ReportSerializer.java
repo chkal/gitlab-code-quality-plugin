@@ -1,4 +1,4 @@
-package de.chkal.maven.gitlab.codequality;
+package de.HardikGoyal905.maven.gitlab.codequality;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;

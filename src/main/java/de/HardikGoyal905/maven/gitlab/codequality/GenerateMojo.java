@@ -1,7 +1,8 @@
-package de.chkal.maven.gitlab.codequality;
+package de.HardikGoyal905.maven.gitlab.codequality;
 
-import de.chkal.maven.gitlab.codequality.checkstyle.CheckstyleFindingProvider;
-import de.chkal.maven.gitlab.codequality.spotbugs.SpotbugsFindingProvider;
+import de.HardikGoyal905.maven.gitlab.codequality.checkstyle.CheckstyleFindingProvider;
+import de.HardikGoyal905.maven.gitlab.codequality.spotbugs.SpotbugsFindingProvider;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
