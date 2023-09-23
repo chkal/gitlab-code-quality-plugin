@@ -17,7 +17,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY)
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
 public class GenerateMojo extends AbstractMojo {
 
   @Parameter(defaultValue = "true")
