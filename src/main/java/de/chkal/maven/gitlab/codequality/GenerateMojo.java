@@ -20,19 +20,19 @@ import org.apache.maven.project.MavenProject;
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.VERIFY, threadSafe = true)
 public class GenerateMojo extends AbstractMojo {
 
-  @Parameter(defaultValue = "true")
+  @Parameter(property = "glcqp.spotbugsEnabled", defaultValue = "true")
   public boolean spotbugsEnabled;
 
-  @Parameter(defaultValue = "${project.build.directory}/spotbugsXml.xml")
+  @Parameter(property = "glcqp.spotbugsInputFile", defaultValue = "${project.build.directory}/spotbugsXml.xml")
   public File spotbugsInputFile;
 
-  @Parameter(defaultValue = "true")
+  @Parameter(property = "glcqp.checkstyleEnabled", defaultValue = "true")
   public boolean checkstyleEnabled;
 
-  @Parameter(defaultValue = "${project.build.directory}/checkstyle-result.xml")
+  @Parameter(property = "glcqp.checkstyeInputFile", defaultValue = "${project.build.directory}/checkstyle-result.xml")
   public File checkstyleInputFile;
 
-  @Parameter(defaultValue = "${project.build.directory}/gl-code-quality-report.json")
+  @Parameter(property = "glcqp.outputFile", defaultValue = "${project.build.directory}/gl-code-quality-report.json")
   public File outputFile;
 
   @Parameter(defaultValue = "${project}", readonly = true, required = true)

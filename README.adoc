@@ -219,6 +219,28 @@ build:
         - merged-gl-code-quality-report.json
 ----
 
+== CLI usage
+
+The plugin may also be used and configured using the Maven CLI. Available configuration properties are:
+
+* `glcqp.spotbugsEnabled`
+* `glcqp.spotbugsInputFile`
+* `glcqp.checkstyleEnabled`
+* `glcqp.checkstyeInputFile`
+* `glcqp.outputFile`
+
+They are used like this:
+
+[source,shell]
+----
+mvn de.chkal.maven:gitlab-code-quality-plugin:{version_stable}:check \
+    -Dglcqp.spotbugsEnabled=true \
+    -Dglcqp.spotbugsInputFile=target/spotbugsXml.xml \
+    -Dglcqp.checkstyleEnabled=true \
+    -Dglcqp.checkstyeInputFile=target/checkstyle-result.xml \
+    -Dglcqp.outputFile=target/gl-code-quality-report.json
+----
+
 == Using the latest snapshots
 
 The latest snapshots of this plugin are deployed to the Sonatype OSSRH repository.
