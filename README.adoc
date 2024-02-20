@@ -231,7 +231,7 @@ The plugin may also be used and configured using the Maven CLI. Available config
 
 They are used like this:
 
-[source,shell]
+[source,shell,subs="+attributes"]
 ----
 mvn de.chkal.maven:gitlab-code-quality-plugin:{version_stable}:check \
     -Dglcqp.spotbugsEnabled=true \
