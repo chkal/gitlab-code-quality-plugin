@@ -83,6 +83,32 @@
               <clearOutputDir>false</clearOutputDir>
             </configuration>
           </execution>
+          <execution>
+            <id>schema-pmd</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/xsd/report_2_0_0.xsd</source>
+              </sources>
+              <packageName>de.chkal.maven.gitlab.codequality.pmd</packageName>
+              <clearOutputDir>false</clearOutputDir>
+            </configuration>
+          </execution>
+          <execution>
+            <id>schema-cpd</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/xsd/cpd-report_1_0_0.xsd</source>
+              </sources>
+              <packageName>de.chkal.maven.gitlab.codequality.cpd</packageName>
+              <clearOutputDir>false</clearOutputDir>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 

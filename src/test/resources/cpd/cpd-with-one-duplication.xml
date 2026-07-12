@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         pmdVersion="7.25.0"
+         timestamp="2026-07-12T20:12:46.82891097+02:00"
+         version="1.0.0"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd.github.io/schema/cpd-report_1_0_0.xsd">
+   <file path="/home/user/projects/myapp/src/main/java/my/package/MyClass1.java"
+         totalNumberOfTokens="95"/>
+   <file path="/home/user/projects/myapp/src/main/java/my/package/MyClass2.java"
+         totalNumberOfTokens="741"/>
+   <duplication lines="27" tokens="121">
+      <file begintoken="1473"
+            column="21"
+            endcolumn="6"
+            endline="183"
+            endtoken="1593"
+            line="157"
+            path="/home/user/projects/myapp/src/main/java/my/package/MyClass1.java"/>
+      <file begintoken="1597"
+            column="22"
+            endcolumn="6"
+            endline="211"
+            endtoken="1717"
+            line="185"
+            path="/home/user/projects/myapp/src/main/java/my/package/MyClass2.java"/>
+      <codefragment><![CDATA[    public void read(byte[] array, int offset, int length) throws IOException
+    {
+        if (offset + length > array.length)
+        {
+            throw new IllegalArgumentException("Wrong offset/length");
+        }
+        
+        final int count = in.read(array, offset, length);
+        if (count != length)
+        {
+            throw new IOException("Cannot read enough data from serial port (expected "
+                                    + length + " bytes but only " + count + " bytes read");
+        }
+    }
+]]></codefragment>
+   </duplication>
+</pmd-cpd>

@@ -1,6 +1,8 @@
 package de.chkal.maven.gitlab.codequality;
 
 import de.chkal.maven.gitlab.codequality.checkstyle.CheckstyleFindingProvider;
+import de.chkal.maven.gitlab.codequality.cpd.CpdFindingProvider;
+import de.chkal.maven.gitlab.codequality.pmd.PmdFindingProvider;
 import de.chkal.maven.gitlab.codequality.spotbugs.SpotbugsFindingProvider;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +34,18 @@ public class GenerateMojo extends AbstractMojo {
   @Parameter(property = "glcqp.checkstyeInputFile", defaultValue = "${project.build.directory}/checkstyle-result.xml")
   public File checkstyleInputFile;
 
+  @Parameter(property = "glcqp.pmdEnabled", defaultValue = "true")
+  public boolean pmdEnabled;
+
+  @Parameter(property = "glcqp.pmdInputFile", defaultValue = "${project.build.directory}/pmd.xml")
+  public File pmdInputFile;
+
+  @Parameter(property = "glcqp.cpdEnabled", defaultValue = "true")
+  public boolean cpdEnabled;
+
+  @Parameter(property = "glcqp.cpdInputFile", defaultValue = "${project.build.directory}/cpd.xml")
+  public File cpdInputFile;
+
   @Parameter(property = "glcqp.outputFile", defaultValue = "${project.build.directory}/gl-code-quality-report.json")
   public File outputFile;
 
@@ -60,6 +74,22 @@ public class GenerateMojo extends AbstractMojo {
         new CheckstyleFindingProvider(repositoryRoot),
         checkstyleEnabled,
         checkstyleInputFile,
+        log
+    ));
+
+    // Run PMD provider
+    findings.addAll(executeProvider(
+        new PmdFindingProvider(repositoryRoot),
+        pmdEnabled,
+        pmdInputFile,
+        log
+    ));
+
+    // Run CPD provider
+    findings.addAll(executeProvider(
+        new CpdFindingProvider(repositoryRoot),
+        cpdEnabled,
+        cpdInputFile,
         log
     ));
 
