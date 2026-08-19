@@ -3,7 +3,8 @@
 :version_snapshot: 1.2.0-SNAPSHOT
 
 This Maven plugin allows you to transform XML reports created by code quality tools like
-https://spotbugs.github.io/[SpotBugs] and https://checkstyle.org/[Checkstyle]
+https://spotbugs.github.io/[SpotBugs], https://checkstyle.org/[Checkstyle]
+and https://pmd.github.io/[PMD/CPD]
 into a JSON format supported by https://about.gitlab.com/[GitLab] to displayed
 identified issues in the merge request widget.
 
@@ -14,7 +15,7 @@ image::.readme/gitlab-merge-request-widget.png[]
 === Step 1: Set up SpotBugs and/or Checkstyle
 
 As this plugin processes XML reports of other code quality tools, you have to set up
-the Maven plugins for SpotBugs and/or Checkstyle first.
+the Maven plugins for SpotBugs and/or Checkstyle and/or PMD/CPD first.
 
 Such a setup could look like this:
 
@@ -67,6 +68,22 @@ Such a setup could look like this:
         </dependencies>
       </plugin>
 
+      <!-- PMD/CPD -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.28.0</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>pmd</goal>
+              <goal>cpd</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 </project>
@@ -109,6 +126,8 @@ Without any explicit configuration, the plugin will look for XML reports in the 
 
 * `target/spotbugsXml.xml`
 * `target/checkstyle-result.xml`
+* `target/pmd.xml`
+* `target/cpd.xml`
 
 If corresponding XML files are found and contain at least one issue, the plugin will
 generate the following JSON file:
@@ -178,6 +197,18 @@ default values:
           <!-- Location of the Checkstyle XML report -->
           <checkstyleInputFile>${project.build.directory}/checkstyle-result.xml</checkstyleInputFile>
 
+          <!-- Whether to enable support for PMD -->
+          <pmdEnabled>true</pmdEnabled>
+
+          <!-- Location of the PMD XML report -->
+          <pmdInputFile>${project.build.directory}/pmd.xml</pmdInputFile>
+
+          <!-- Whether to enable support for CPD -->
+          <cpdEnabled>true</cpdEnabled>
+
+          <!-- Location of the CPD XML report -->
+          <cpdInputFile>${project.build.directory}/pmd.xml</cpdInputFile>
+
           <!-- Location of the JSON output file -->
           <outputFile>${project.build.directory}/gl-code-quality-report.json</outputFile>
 
@@ -227,6 +258,10 @@ The plugin may also be used and configured using the Maven CLI. Available config
 * `glcqp.spotbugsInputFile`
 * `glcqp.checkstyleEnabled`
 * `glcqp.checkstyeInputFile`
+* `glcqp.pmdEnabled`
+* `glcqp.pmdInputFile`
+* `glcqp.cpdEnabled`
+* `glcqp.cpdInputFile`
 * `glcqp.outputFile`
 
 They are used like this:
@@ -238,6 +273,10 @@ mvn de.chkal.maven:gitlab-code-quality-plugin:{version_stable}:check \
     -Dglcqp.spotbugsInputFile=target/spotbugsXml.xml \
     -Dglcqp.checkstyleEnabled=true \
     -Dglcqp.checkstyeInputFile=target/checkstyle-result.xml \
+    -Dglcqp.pmdEnabled=true \
+    -Dglcqp.pmdInputFile=target/pmd.xml \
+    -Dglcqp.cpdEnabled=true \
+    -Dglcqp.cpdInputFile=target/cpd.xml \
     -Dglcqp.outputFile=target/gl-code-quality-report.json
 ----
 
