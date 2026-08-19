@@ -23,17 +23,6 @@
     <url>https://github.com/chkal/gitlab-code-quality-plugin</url>
   </scm>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
@@ -110,6 +99,18 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Maven deployment -->
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.9.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+        </configuration>
       </plugin>
 
     </plugins>
