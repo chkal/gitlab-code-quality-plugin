@@ -49,12 +49,20 @@ public class GenerateMojo extends AbstractMojo {
   @Parameter(property = "glcqp.outputFile", defaultValue = "${project.build.directory}/gl-code-quality-report.json")
   public File outputFile;
 
+  @Parameter(property = "glcqp.skip", defaultValue = "false")
+  public boolean skip;
+
   @Parameter(defaultValue = "${project}", readonly = true, required = true)
   private MavenProject project;
 
   public void execute() throws MojoFailureException {
 
     Logger log = new Logger(getLog());
+
+    if (skip) {
+      log.info("Skipping GitLab code quality report generation");
+      return;
+    }
 
     // Lookup repository root so we can build repository-relative paths
     File repositoryRoot = getRepositoryRootDir(project.getBasedir(), log);
