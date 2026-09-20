@@ -185,6 +185,9 @@ default values:
         </executions>
         <configuration>
 
+          <!-- Whether to skip the plugin execution entirely -->
+          <skip>false</skip>
+
           <!-- Whether to enable support for SpotBugs -->
           <spotbugsEnabled>true</spotbugsEnabled>
 
@@ -254,6 +257,7 @@ build:
 
 The plugin may also be used and configured using the Maven CLI. Available configuration properties are:
 
+* `glcqp.skip`
 * `glcqp.spotbugsEnabled`
 * `glcqp.spotbugsInputFile`
 * `glcqp.checkstyleEnabled`
@@ -269,6 +273,7 @@ They are used like this:
 [source,shell,subs="+attributes"]
 ----
 mvn de.chkal.maven:gitlab-code-quality-plugin:{version_stable}:check \
+    -Dglcqp.skip=false \
     -Dglcqp.spotbugsEnabled=true \
     -Dglcqp.spotbugsInputFile=target/spotbugsXml.xml \
     -Dglcqp.checkstyleEnabled=true \
